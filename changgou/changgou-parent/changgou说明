@@ -1,0 +1,22 @@
+1.项目结构搭建说明：
+    changgou-parent:管理所有依赖的版本,打包pom
+    		changgou-common:管理工具类,打包jar包
+    		chonggou-common-db:管理所有使用到数据库的微服务,打包jar包
+    		chnaggou-service:统一管理所有的微服务,打包pom
+    			changgou-service-goods:管理商品微服务;
+    			...
+    			...
+    		changgou-service-api:管理所有的feign,pojo等,打包pom;
+    			changgou-service-goods-api(包含feign,pojo等):打包jar包
+    				提供商品相关的feign,pojo等,其他微服务需要使用,直接依赖即可;
+    		changgou-web:打包pom,统一管理所有web相关的微服务;
+    		changgou-gateway:统一管理网关微服务,pom
+    			后台网关
+    			前台网关
+    		changgou-eureka-server:作为eureka服务器微服务;
+
+2.SpringBoot集成的通用Mapper,内部封装了mybatis：抽取了基本的CRUD功能，继承相应的接口后，无需再写基本的CRUD
+    2.1 加入通用Mapper的起步依赖
+    2.2 编写mapper接口继承通用的mapper接口，就拥有了基本的CRUD
+    2.3 使用通用mapper的注解来扫描mapper接口：@MapperScan(basePackages = "com.changgou.goods.dao")
+    2.4 pojo中需要使用jpa注解来进行映射
